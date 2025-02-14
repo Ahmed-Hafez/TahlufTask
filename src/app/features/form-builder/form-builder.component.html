@@ -1,0 +1,24 @@
+<div class="d-flex justify-content-space-between">
+  <section style="max-width: 50vw;">
+
+    <h1>
+      Form Section
+    </h1>
+    <div>
+      @for (control of formControls; track $index) {
+        <app-control [control]="control" (click)="control_click(control, $event)"></app-control>
+        <hr>
+        <hr>
+      }
+    </div>
+
+  </section>
+
+  <section>
+
+    <h1>
+      Side Menu Section
+    </h1>
+    <app-side-menu [control]="selectedControl" (click)="sideMenu_click($event)"></app-side-menu>
+  </section>
+</div>

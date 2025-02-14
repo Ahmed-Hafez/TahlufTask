@@ -1,0 +1,7 @@
+
+@if(control) {
+  <label [for]="control.id">{{control.name}}</label>
+  <br>
+  <textarea [id]="control.id" [name]="control.name" [rows]="control.rows" [cols]="control.columns" [ngStyle]="{borderColor: control.border?.color, borderWidth: control.border?.size}"></textarea>
+
+}

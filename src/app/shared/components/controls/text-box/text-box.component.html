@@ -1,0 +1,5 @@
+@if(control) {
+  <label [for]="control.id">{{control.name}}</label>
+  <br>
+  <input type="text" [id]="control.id" [name]="control.name" [placeholder]="control.placeholder" [ngStyle]="{borderColor: control.border?.color, borderWidth: control.border?.size}">
+}

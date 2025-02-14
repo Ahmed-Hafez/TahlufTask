@@ -1,0 +1,4 @@
+@if(control) {
+  <button [id]="control.id" [name]="control.name" [ngStyle]="{borderColor: control.border?.color, borderWidth: control.border?.size}">{{control.name}}</button>
+  <caption style="display: block; text-align: start;">{{control.caption}}</caption>
+}
