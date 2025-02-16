@@ -10,9 +10,11 @@ export class TextBox implements Control, IControl {
   border?: Border;
   placeholder?: string = '';
 
-  constructor(id: string, name: string) {
+  constructor(id: string, name: string, border?: Border, placeholder: string = '') {
     this.id = id;
     this.name = name;
+    this.border = border;
+    this.placeholder = placeholder;
   }
 
   getControlType() {

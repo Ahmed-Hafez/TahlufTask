@@ -10,9 +10,11 @@ export class Button implements Control, IControl {
   border?: Border;
   caption?: string = '';
 
-  constructor(id: string, name: string) {
+  constructor(id: string, name: string, border?: Border, caption: string = '') {
     this.id = id;
     this.name = name;
+    this.border = border;
+    this.caption = caption;
   }
 
   getControlType() {

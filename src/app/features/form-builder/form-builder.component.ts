@@ -6,10 +6,11 @@ import { TextArea } from '../../shared/models/text-area.model';
 import { ControlComponent } from '../control/control.component';
 import { IControl } from '../../shared/interfaces/IControl.interface';
 import { SideMenuComponent } from "../side-menu/side-menu.component";
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-form-builder',
-  imports: [ControlComponent, SideMenuComponent],
+  imports: [ControlComponent, SideMenuComponent, CommonModule],
   templateUrl: './form-builder.component.html',
   styleUrl: './form-builder.component.scss'
 })
@@ -30,11 +31,14 @@ export class FormBuilderComponent implements AfterViewInit{
     return controls.map((control) => {
       switch (control.type) {
         case 'textbox':
-          return new TextBox(control.id, control.name);
+          const textbox = control as TextBox;
+          return new TextBox(control.id, control.name, textbox.border, textbox.placeholder);
         case 'button':
-          return new Button(control.id, control.name);
-        case 'textarea':
-          return new TextArea(control.id, control.name);
+          const button = control as Button;
+          return new Button(button.id, button.name, button.border, button.caption);
+          case 'textarea':
+          const textarea = control as TextArea;
+          return new TextArea(control.id, control.name, textarea.border, textarea.rows, textarea.columns);
         default:
           throw new Error('Control type not supported');
       }
