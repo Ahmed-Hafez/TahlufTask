@@ -1,21 +1,28 @@
-import { AfterViewInit, ChangeDetectorRef, Component, inject, input } from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectorRef,
+  Component,
+  inject,
+  input,
+} from '@angular/core';
 import { Control } from '../../shared/models/control.model';
 import { TextBox } from '../../shared/models/text-box.model';
 import { Button } from '../../shared/models/Button.model ';
 import { TextArea } from '../../shared/models/text-area.model';
 import { ControlComponent } from '../control/control.component';
 import { IControl } from '../../shared/interfaces/IControl.interface';
-import { SideMenuComponent } from "../side-menu/side-menu.component";
+import { SideMenuComponent } from '../side-menu/side-menu.component';
 import { CommonModule } from '@angular/common';
+import { controlFactory } from '../../shared/factories/control.factory';
 
 @Component({
   selector: 'app-form-builder',
   imports: [ControlComponent, SideMenuComponent, CommonModule],
   templateUrl: './form-builder.component.html',
-  styleUrl: './form-builder.component.scss'
+  styleUrl: './form-builder.component.scss',
 })
-export class FormBuilderComponent implements AfterViewInit{
-  formControlsInput = input.required<Control[]>();
+export class FormBuilderComponent implements AfterViewInit {
+  formControlsInput = input.required<IControl[]>();
   formControls: IControl[] = [];
   selectedControl?: IControl;
 
@@ -27,24 +34,13 @@ export class FormBuilderComponent implements AfterViewInit{
     window.onclick = this.resetSelectedControl.bind(this);
   }
 
-  private castControls(controls: Control[]): IControl[] {
+  private castControls(controls: IControl[]): IControl[] {
     return controls.map((control) => {
-      switch (control.type) {
-        case 'textbox':
-          const textbox = control as TextBox;
-          return new TextBox(control.id, control.name, textbox.border, textbox.placeholder);
-        case 'button':
-          const button = control as Button;
-          return new Button(button.id, button.name, button.border, button.caption);
-          case 'textarea':
-          const textarea = control as TextArea;
-          return new TextArea(control.id, control.name, textarea.border, textarea.rows, textarea.columns);
-        default:
-          throw new Error('Control type not supported');
-      }
-    })
+      const createControl = controlFactory[control.type];
+      if (!createControl) throw new Error('Control type not supported');
+      return createControl(control);
+    });
   }
-
 
   control_click(control: IControl, event: MouseEvent): void {
     event.stopPropagation();

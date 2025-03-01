@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { TextArea } from '../../../models/text-area.model';
+import { AbstractControlDirective } from '../../../directives/abstract-control/abstract-control.directive';
 
 @Component({
   selector: 'app-text-area',
@@ -8,6 +9,5 @@ import { TextArea } from '../../../models/text-area.model';
   templateUrl: './text-area.component.html',
   styleUrl: './text-area.component.scss'
 })
-export class TextAreaComponent {
-  control?: TextArea;
+export class TextAreaComponent extends AbstractControlDirective<TextArea> {
 }

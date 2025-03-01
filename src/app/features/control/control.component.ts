@@ -1,6 +1,4 @@
-import { AfterViewInit, Component, ComponentRef, inject, input, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
-import { TextBoxComponent } from '../../shared/components/controls/text-box/text-box.component';
-import { Control } from '../../shared/models/control.model';
+import { AfterViewInit, Component, input, ViewChild, ViewContainerRef } from '@angular/core';
 import { IControl } from '../../shared/interfaces/IControl.interface';
 
 @Component({
@@ -13,10 +11,8 @@ export class ControlComponent implements AfterViewInit {
   @ViewChild('InputContainer', {read: ViewContainerRef}) controlContainer?: ViewContainerRef;
   control = input.required<IControl>()
 
-
-
   ngAfterViewInit(): void {
-    const compRef = this.controlContainer!.createComponent(this.control().getControlType());
+    const compRef = this.controlContainer!.createComponent(this.control().getControlComponent());
     compRef.instance.control = this.control();
   }
 }

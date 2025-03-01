@@ -3,19 +3,8 @@
     <div>
       <label>Type : </label>
       <span>{{control()!.type}}</span>
+      <br>
+      <app-setting [control]="control()!"></app-setting>
     </div>
   }
-  @for (option of controlOptions; track $index) {
-    <ng-container *ngTemplateOutlet="optionInput; context: { $implicit: option }"></ng-container>
-  }
 </div>
-
-
-<ng-template #optionInput let-option>
-  <div>
-    <label [for]="option + control()?.id">{{option}} : </label>
-    <input type="text" [id]="option + control()?.id" [name]="option + control()?.id" (input)="onInputChange($event)" [ngModel]="$any(control())[option]" (ngModelChange)="onModelChange($event, option)">
-    <p class="error"> {{'Here is the error'}} </p>
-  </div>
-</ng-template>
-

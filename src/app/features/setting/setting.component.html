@@ -1,0 +1,27 @@
+<div style="padding-block: 10px;">
+  ID:
+  <input #id="ngModel" maxlength="10" type="text" [id]="'id-' + control().id" [name]="'id-' + control().id" [(ngModel)]="control().id" >
+</div>
+<hr>
+<div style="padding-block: 10px;">
+  Name:
+  <input #name="ngModel" type="text" [id]="'name-' + control().id" [name]="'name-' + control().id" [(ngModel)]="control().name" minlength="5" maxlength="10">
+  @if (name.errors && name.errors['minlength']) {
+    <p class="error">Min Length is 5, Current is {{name.value.length}}</p>
+  } @else if (name.errors && name.errors['maxlength']) {
+    <p class="error">Max Length is 10, Current is {{name.value.length}}</p>
+  }
+</div>
+<hr>
+<div style="padding-block: 10px;">
+  Border:
+  <div style="padding: 10px;">
+    Color:
+    <input type="text" [id]="'border-color' + control().id" [name]="'border-color-' + control().id" [(ngModel)]="control()!.border!.color" >
+    <hr>
+    Size:
+    <input type="text" [id]="'border-size' + control().id" [name]="'border-size-' + control().id" [(ngModel)]="control()!.border!.size" >
+  </div>
+</div>
+<hr>
+<ng-container #customSettingContainer></ng-container>

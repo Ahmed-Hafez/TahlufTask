@@ -1,5 +1,4 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
 import { FormBuilderComponent } from './features/form-builder/form-builder.component';
 import { MockService } from './core/services/mock/mock.service';
 import { Observable } from 'rxjs';
@@ -7,7 +6,7 @@ import { Control } from './shared/models/control.model';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, FormBuilderComponent],
+  imports: [FormBuilderComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
